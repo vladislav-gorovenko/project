@@ -1,36 +1,15 @@
-import path from 'path';
 import webpack from 'webpack';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
 import 'webpack-dev-server';
+import {buildWebpackConfig} from "./config/build/buildWebpackConfig";
+import path from "path";
 
-const config: webpack.Configuration = {
-    mode: 'development',
-    entry: './src/index.ts',
-    devtool: 'inline-source-map',
-    module: {
-        rules: [
-            {
-                test: /\.tsx?$/,
-                use: 'ts-loader',
-                exclude: /node_modules/,
-            },
-        ],
-    },
-    resolve: {
-        // указываем расширения файлов, которые будем использовать (чтобы не указывать их при импорте)
-        extensions: ['.tsx', '.ts', '.js'],
-    },
-    output: {
-        filename: '[name].[contenthash:8].js',
-        path: path.resolve(__dirname, 'build'),
-        clean: true,
-    },
-    plugins: [
-        new webpack.ProgressPlugin(),
-        new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, 'public', 'index.html'),
-            filename: '[name].[contenthash:8].html',
-        }),
-    ],
+const paths = {
+    entry: path.resolve(__dirname, 'src', 'index.ts'),
+    build: path.resolve(__dirname, 'build'),
+    html: path.resolve(__dirname, 'public', 'index.html')
 }
+const mode = 'development'
+const isDev = mode === 'development'
+
+const config: webpack.Configuration = buildWebpackConfig({mode, paths, isDev})
 export default config;
