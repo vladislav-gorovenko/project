@@ -1,14 +1,13 @@
 import webpack from "webpack";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import path from "path";
-import { BuildWebpackConfigOptions } from "./buildWebpackConfig";
+import { BuildOptions } from "./types/config";
 
-export function buildPlugins(options: BuildWebpackConfigOptions): webpack.WebpackPluginInstance[] {
+export function buildPlugins(options: BuildOptions): webpack.WebpackPluginInstance[] {
 	return [
 		new webpack.ProgressPlugin(),
 		new HtmlWebpackPlugin({
-			template: path.resolve(options.paths.html),
-			filename: '[name].[contenthash:8].html',
+			template: options.paths.html,
 		}),
 	]
 }

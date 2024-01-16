@@ -1,26 +1,16 @@
-import webpack from "webpack";
+import type {Configuration as WebpackConfiguration} from "webpack";
 import {buildResolvers} from "./buildResolvers";
 import {buildPlugins} from "./buildPlugins";
 import {buildLoaders} from "./buildLoaders";
+import {buildDevServer} from "./buildDevServer";
+import {BuildOptions} from "./types/config";
 
-type WebpackMode = 'development' | 'production';
-
-export interface BuildWebpackConfigOptions {
-	mode: WebpackMode;
-	paths: {
-		entry: string;
-		build: string;
-		html: string;
-	};
-	isDev: boolean;
-}
-
-export function buildWebpackConfig(options: BuildWebpackConfigOptions): webpack.Configuration {
+export function buildWebpackConfig(options: BuildOptions): WebpackConfiguration {
 	const { paths, mode } = options;
 	return  {
-		mode: mode,
+		mode,
 		entry: paths.entry,
-		devtool: 'inline-source-map',
+		devtool: options.isDev ? 'inline-source-map' : false,
 		module: {
 			rules: buildLoaders(),
 		},
@@ -31,5 +21,6 @@ export function buildWebpackConfig(options: BuildWebpackConfigOptions): webpack.
 			clean: true,
 		},
 		plugins: buildPlugins(options),
+		devServer: options.isDev ? buildDevServer(options) : undefined,
 	}
 }
