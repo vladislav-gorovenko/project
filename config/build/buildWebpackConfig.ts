@@ -12,7 +12,7 @@ export function buildWebpackConfig(options: BuildOptions): WebpackConfiguration 
 		entry: paths.entry,
 		devtool: options.isDev ? 'inline-source-map' : false,
 		module: {
-			rules: buildLoaders(),
+			rules: buildLoaders(options),
 		},
 		resolve: buildResolvers() ,
 		output: {

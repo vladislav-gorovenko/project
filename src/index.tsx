@@ -1,16 +1,9 @@
 import {createRoot} from "react-dom/client";
-import "./style.scss"
 import {StrictMode} from "react";
-import {Counter} from "./components/Counter";
+import "./style.scss"
 
-const App = () => {
-	return <StrictMode>
-		<div>
-			<Counter/>
-		</div>
-	</StrictMode>
-}
+import {App} from "./App";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
-root.render(<App/>);
+root.render(<StrictMode><App/></StrictMode>);
