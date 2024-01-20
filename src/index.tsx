@@ -1,8 +1,8 @@
 import {createRoot} from "react-dom/client";
 import {BrowserRouter as Router} from "react-router-dom";
 import {StrictMode} from "react";
-import App from "./App";
-import ThemeProvider from "./theme/ThemeProvider";
+import App from "./app/App";
+import {ThemeProvider} from "./app/providers/ThemeProvider";
 
 const container = document.getElementById("root");
 
