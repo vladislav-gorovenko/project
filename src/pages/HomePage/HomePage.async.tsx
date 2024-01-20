@@ -1,3 +1,7 @@
 import {lazy} from "react";
 
-export const HomePage = lazy(() => import('./HomePage'))
+export const HomePageAsync = lazy(
+	() => new Promise(resolve => {
+		// @ts-ignore
+		setTimeout(()=>resolve(import('./HomePage')), 2000)
+	}))
