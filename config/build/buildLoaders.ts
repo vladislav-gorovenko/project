@@ -7,9 +7,9 @@ export function buildLoaders(options: BuildOptions): webpack.RuleSetRule[] {
 	const { isDev } = options;
 
 	const tsLoader = {
-			test: /\.tsx?$/,
-			use: 'ts-loader',
-			exclude: /node_modules/,
+		test: /\.tsx?$/,
+		use: 'ts-loader',
+		exclude: /node_modules/,
 	}
 
 	const cssLoader = {
