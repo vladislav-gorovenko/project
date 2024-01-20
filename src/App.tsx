@@ -5,11 +5,12 @@ import {NotFoundPageAsync} from "./pages/NotFoundPage/NotFoundPage.async";
 import {Suspense} from "react";
 import {useTheme} from "./theme/useTheme";
 import './styles/index.scss'
+import {classNames} from './helpers/classNames'
 
 const App = () => {
 	const [theme, toggleTheme] = useTheme()
 	return (
-		<div className={`app ${theme}`}>
+		<div className={classNames('app', {}, [theme])}>
 			<nav>
 				<Link to='/'>Home</Link>
 				<Link to='/about'>About</Link>
